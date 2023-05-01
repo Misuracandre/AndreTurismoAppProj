@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\AndreTurismoApp.AddressesService\AndreTurismoApp.AddressesService.csproj" />
     <ProjectReference Include="..\AndreTurismoApp.CitiesService\AndreTurismoApp.CitiesService.csproj" />
-    <ProjectReference Include="..\AndreTurismoApp.CustomersService\AndreTurismoApp.CustomersService.csproj" />
     <ProjectReference Include="..\AndreTurismoApp.Models\AndreTurismoApp.Models.csproj" />
     <ProjectReference Include="..\AndreTurismoApp.Services\AndreTurismoApp.Services.csproj" />
   </ItemGroup>

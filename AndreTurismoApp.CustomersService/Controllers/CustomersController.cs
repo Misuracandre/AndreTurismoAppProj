@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.CustomersService.Data;
 using AndreTurismoApp.Models;
 using AndreTurismoApp.AddressesService.Data;
+using AndreTurismoApp.Services;
+//using AndreTurismoApp.AddressesService.Data;
 
 namespace AndreTurismoApp.CustomersService.Controllers
 {
@@ -16,12 +18,13 @@ namespace AndreTurismoApp.CustomersService.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly AndreTurismoAppCustomersServiceContext _context;
-        private readonly AndreTurismoAppAddressesServiceContext _contextAddress;
+        //private readonly AndreTurismoAppAddressesServiceContext _contextAddress;
+        //private readonly AddressService _addressService;
 
-        public CustomersController(AndreTurismoAppCustomersServiceContext context, AndreTurismoAppAddressesServiceContext contextAddress)
+        public CustomersController(AndreTurismoAppCustomersServiceContext context /*AddressService addressService*/)
         {
             _context = context;
-            _contextAddress = contextAddress;
+            //_addressService = addressService;
         }
 
         // GET: api/Customers
@@ -103,22 +106,19 @@ namespace AndreTurismoApp.CustomersService.Controllers
                 return Problem("Entity set 'AndreTurismoAppCustomersServiceContext.Customer'  is null.");
             }
 
-            var address = await _contextAddress.GetAddressByIdAsync(customer.IdAddress);
 
-            if (address == null)
-            {
-                return BadRequest("Endereço não encontrado");
-            }
 
-            var customer = new Customer
-            {
-                Name = customer.Name,
-                Email = model.Email,
-                AddressId = address.Id
-            };
+            //var address = await _addressService.FindAsync(customer.IdAddress.Id);
+
+            //if (address == null)
+            //{
+            //    return BadRequest("Endereço não encontrado");
+            //}
+
+            //customer.IdAddress = address;
 
             _context.Customer.Add(customer);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }

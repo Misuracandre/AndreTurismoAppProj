@@ -20,5 +20,20 @@ namespace AndreTurismoApp.Services
                 throw;
             }
         }
+
+        public async Task<Address> FindAsync(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await addressClient.GetAsync($"https://localhost:7060/api/Addresses/{id}");
+                response.EnsureSuccessStatusCode();
+                string address = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Address>(address);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
     }
 }
