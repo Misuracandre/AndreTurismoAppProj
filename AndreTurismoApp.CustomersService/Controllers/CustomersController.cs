@@ -103,16 +103,22 @@ namespace AndreTurismoApp.CustomersService.Controllers
                 return Problem("Entity set 'AndreTurismoAppCustomersServiceContext.Customer'  is null.");
             }
 
-            var address = await _contextAddress.Address.FindAsync(customer.IdAddress);
+            var address = await _contextAddress.GetAddressByIdAsync(customer.IdAddress);
+
             if (address == null)
             {
-                return NotFound();
+                return BadRequest("Endereço não encontrado");
             }
 
-            customer.IdAddress = address;
+            var customer = new Customer
+            {
+                Name = customer.Name,
+                Email = model.Email,
+                AddressId = address.Id
+            };
 
             _context.Customer.Add(customer);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }

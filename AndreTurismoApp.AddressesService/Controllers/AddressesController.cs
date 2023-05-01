@@ -37,7 +37,7 @@ namespace AndreTurismoApp.AddressesService.Controllers
 
         // GET: api/Addresses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Address>> GetAddress(int id)
+        public async Task<ActionResult<Address>> GetAddressById(int id)
         {
           if (_context.Address == null)
           {
