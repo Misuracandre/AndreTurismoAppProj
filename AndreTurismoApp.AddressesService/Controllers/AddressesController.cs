@@ -32,7 +32,7 @@ namespace AndreTurismoApp.AddressesService.Controllers
           {
               return NotFound();
           }
-            return await _context.Address.Include(a => a.City).ToListAsync();
+            return await _context.Address.Include(a => a.IdCity).ToListAsync();
         }
 
         // GET: api/Addresses/5
@@ -43,7 +43,7 @@ namespace AndreTurismoApp.AddressesService.Controllers
           {
               return NotFound();
           }
-            var address = await _context.Address.Include(a => a.City).Where(a => a.Id == id).FirstOrDefaultAsync();
+            var address = await _context.Address.Include(a => a.IdCity).Where(a => a.Id == id).FirstOrDefaultAsync();
 
             if (address == null)
             {

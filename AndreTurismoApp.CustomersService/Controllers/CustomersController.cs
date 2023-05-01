@@ -26,13 +26,19 @@ namespace AndreTurismoApp.CustomersService.Controllers
 
         // GET: api/Customers
         [HttpGet("GetCustomer")]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
+        public async Task<ActionResult<List<Customer>>> GetCustomers()
         {
             if (_context.Customer == null)
             {
                 return NotFound();
             }
-            return await _context.Customer.ToListAsync();
+
+            var customers = await _context.Customer
+                .Include(c => c.IdAddress)
+                    .ThenInclude(a => a.IdCity)
+                .ToListAsync();
+
+            return customers;
         }
 
         // GET: api/Customers/5
@@ -43,7 +49,10 @@ namespace AndreTurismoApp.CustomersService.Controllers
             {
                 return NotFound();
             }
-            var customer = await _context.Customer.FindAsync(id);
+            var customer = await _context.Customer
+                .Include(c => c.IdAddress)
+                    .ThenInclude(a => a.IdCity)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             if (customer == null)
             {
