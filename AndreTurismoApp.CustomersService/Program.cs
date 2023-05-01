@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AndreTurismoAppCustomersServiceContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AndreTurismoAppCustomersServiceContext") ?? throw new InvalidOperationException("Connection string 'AndreTurismoAppCustomersServiceContext' not found.")));
 
+builder.Services.AddDbContext<AndreTurismoAppAddressesServiceContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AndreTurismoAppAddressesServiceContext") ?? throw new InvalidOperationException("Connection string 'AndreTurismoAppAddressesServiceContext' not found.")));
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -14,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddSingleton<AndreTurismoAppAddressesServiceContext>();
+
 
 var app = builder.Build();
 
