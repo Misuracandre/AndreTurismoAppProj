@@ -10,7 +10,7 @@ namespace AndreTurismoApp.Services
         {
             try
             {
-                HttpResponseMessage response = await CustomerService.customerClient.GetAsync("https://localhost:7141/api/Addresses");
+                HttpResponseMessage response = await CustomerService.customerClient.GetAsync("https://localhost:7141/api/Cities");
                 response.EnsureSuccessStatusCode();
                 string customerJson = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Customer>>(customerJson);

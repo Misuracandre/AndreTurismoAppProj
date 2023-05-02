@@ -18,12 +18,13 @@ namespace AndreTurismoApp.CustomersService.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly AndreTurismoAppCustomersServiceContext _context;
-        //private readonly AndreTurismoAppAddressesServiceContext _contextAddress;
+        private readonly AndreTurismoAppAddressesServiceContext _contextAddress;
         //private readonly AddressService _addressService;
 
-        public CustomersController(AndreTurismoAppCustomersServiceContext context /*AddressService addressService*/)
+        public CustomersController(AndreTurismoAppCustomersServiceContext context, AndreTurismoAppAddressesServiceContext contextAddress)
         {
             _context = context;
+            _contextAddress = contextAddress;
             //_addressService = addressService;
         }
 
@@ -108,14 +109,13 @@ namespace AndreTurismoApp.CustomersService.Controllers
 
 
 
-            //var address = await _addressService.FindAsync(customer.IdAddress.Id);
+            var address = await _contextAddress.Address.FindAsync(customer.IdAddress);
+            if (address == null)
+            {
+                return NotFound();
+            }
 
-            //if (address == null)
-            //{
-            //    return BadRequest("Endereço não encontrado");
-            //}
-
-            //customer.IdAddress = address;
+            customer.IdAddress = address;
 
             _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
