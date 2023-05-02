@@ -1,12 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using AndreTurismoApp.CustomersService.Data;
 using AndreTurismoApp.AddressesService.Data;
 using AndreTurismoApp.Services;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AndreTurismoAppCustomersServiceContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AndreTurismoAppCustomersServiceContext") ?? throw new InvalidOperationException("Connection string 'AndreTurismoAppCustomersServiceContext' not found.")));
+
+builder.Services.AddDbContext<AndreTurismoAppAddressesServiceContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AndreTurismoAppAddressesServiceContext") ?? throw new InvalidOperationException("Connection string 'AndreTurismoAppCustomersServiceContext' not found.")));
 
 builder.Services.AddSingleton<AddressService>();
 builder.Services.AddSingleton<CustomerService>();
