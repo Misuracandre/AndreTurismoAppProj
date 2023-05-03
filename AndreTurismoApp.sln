@@ -13,7 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.AddressesSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.CitiesService", "AndreTurismoApp.CitiesService\AndreTurismoApp.CitiesService.csproj", "{58A6E2F2-CB51-4EFA-B9EF-34B140BBC613}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.CustomersService", "AndreTurismoApp.CustomersService\AndreTurismoApp.CustomersService.csproj", "{AA96F144-9801-4D56-9E8F-7AD97BEEBACF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalService", "ExternalService", "{D794A412-932E-4139-934C-5D643DF9CB32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.ExternalsService", "AndreTurismoApp.ExternalsService\AndreTurismoApp.ExternalsService.csproj", "{F3B1F13E-B1F8-4F2A-A8FD-E3E346E9E110}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.CustomersService", "AndreTurismoApp.CustomersService\AndreTurismoApp.CustomersService.csproj", "{8A177BA6-85C2-411C-95A8-7695BAB730E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.HotelsService", "AndreTurismoApp.HotelsService\AndreTurismoApp.HotelsService.csproj", "{0425A469-909E-4A21-B195-1158610EE039}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.TicketsService", "AndreTurismoApp.TicketsService\AndreTurismoApp.TicketsService.csproj", "{559BB64B-368E-49D1-BD4B-C0E540CFAF62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,13 +49,28 @@ Global
 		{58A6E2F2-CB51-4EFA-B9EF-34B140BBC613}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58A6E2F2-CB51-4EFA-B9EF-34B140BBC613}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58A6E2F2-CB51-4EFA-B9EF-34B140BBC613}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA96F144-9801-4D56-9E8F-7AD97BEEBACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA96F144-9801-4D56-9E8F-7AD97BEEBACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA96F144-9801-4D56-9E8F-7AD97BEEBACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA96F144-9801-4D56-9E8F-7AD97BEEBACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3B1F13E-B1F8-4F2A-A8FD-E3E346E9E110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B1F13E-B1F8-4F2A-A8FD-E3E346E9E110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B1F13E-B1F8-4F2A-A8FD-E3E346E9E110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B1F13E-B1F8-4F2A-A8FD-E3E346E9E110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A177BA6-85C2-411C-95A8-7695BAB730E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A177BA6-85C2-411C-95A8-7695BAB730E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A177BA6-85C2-411C-95A8-7695BAB730E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A177BA6-85C2-411C-95A8-7695BAB730E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0425A469-909E-4A21-B195-1158610EE039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0425A469-909E-4A21-B195-1158610EE039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0425A469-909E-4A21-B195-1158610EE039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0425A469-909E-4A21-B195-1158610EE039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{559BB64B-368E-49D1-BD4B-C0E540CFAF62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{559BB64B-368E-49D1-BD4B-C0E540CFAF62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{559BB64B-368E-49D1-BD4B-C0E540CFAF62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{559BB64B-368E-49D1-BD4B-C0E540CFAF62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F3B1F13E-B1F8-4F2A-A8FD-E3E346E9E110} = {D794A412-932E-4139-934C-5D643DF9CB32}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1793AE6A-CDF0-4DC2-86FB-6AD3D913E6BF}

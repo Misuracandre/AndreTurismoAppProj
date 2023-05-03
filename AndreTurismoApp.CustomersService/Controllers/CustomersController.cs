@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.CustomersService.Data;
 using AndreTurismoApp.Models;
-using AndreTurismoApp.AddressesService.Data;
 using AndreTurismoApp.Services;
-//using AndreTurismoApp.AddressesService.Data;
 
 namespace AndreTurismoApp.CustomersService.Controllers
 {
@@ -18,31 +16,26 @@ namespace AndreTurismoApp.CustomersService.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly AndreTurismoAppCustomersServiceContext _context;
-        private readonly AndreTurismoAppAddressesServiceContext _contextAddress;
-        //private readonly AddressService _addressService;
+        private readonly PostOfficesService _postOfficeService;
 
-        public CustomersController(AndreTurismoAppCustomersServiceContext context, AndreTurismoAppAddressesServiceContext contextAddress)
+        public CustomersController(AndreTurismoAppCustomersServiceContext context, PostOfficesService postOfficeService)
         {
             _context = context;
-            _contextAddress = contextAddress;
-            //_addressService = addressService;
+            _postOfficeService = postOfficeService;
         }
 
         // GET: api/Customers
-        [HttpGet("GetCustomer")]
-        public async Task<ActionResult<List<Customer>>> GetCustomers()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
         {
             if (_context.Customer == null)
             {
                 return NotFound();
             }
-
-            var customers = await _context.Customer
+            return await _context.Customer
                 .Include(c => c.IdAddress)
                     .ThenInclude(a => a.IdCity)
                 .ToListAsync();
-
-            return customers;
         }
 
         // GET: api/Customers/5
@@ -53,10 +46,7 @@ namespace AndreTurismoApp.CustomersService.Controllers
             {
                 return NotFound();
             }
-            var customer = await _context.Customer
-                .Include(c => c.IdAddress)
-                    .ThenInclude(a => a.IdCity)
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var customer = await _context.Customer.FindAsync(id);
 
             if (customer == null)
             {
@@ -99,28 +89,22 @@ namespace AndreTurismoApp.CustomersService.Controllers
 
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("PostCustomer")]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        [HttpPost]
+        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)   
         {
             if (_context.Customer == null)
             {
                 return Problem("Entity set 'AndreTurismoAppCustomersServiceContext.Customer'  is null.");
             }
 
-
-
-            var address = await _contextAddress.Address.FindAsync(customer.IdAddress);
-            if (address == null)
-            {
-                return NotFound();
-            }
-
-            customer.IdAddress = address;
+            AddressDTO addressDto = _postOfficeService.GetAddress(customer.IdAddress.CEP).Result;
+            var addresscomplet = new Address(addressDto);
+            customer.IdAddress = addresscomplet;
 
             _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+            return customer;
         }
 
         // DELETE: api/Customers/5

@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace AndreTurismoApp.Models
 {
-    public class City
+    public class Package
     {
         public int Id { get; set; }
-        public string? Description { get; set; }
+        public Hotel IdHotel { get; set; }
+        public Ticket IdTicket { get; set; }
+        public Customer IdCustomer { get; set; }
+        public decimal Value { get; set; }
     }
 }

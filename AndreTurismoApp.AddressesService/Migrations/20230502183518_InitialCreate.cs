@@ -29,23 +29,23 @@ namespace AndreTurismoApp.AddressesService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CEP = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CityId = table.Column<int>(type: "int", nullable: false)
+                    IdCityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Address", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Address_City_CityId",
-                        column: x => x.CityId,
+                        name: "FK_Address_City_IdCityId",
+                        column: x => x.IdCityId,
                         principalTable: "City",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_CityId",
+                name: "IX_Address_IdCityId",
                 table: "Address",
-                column: "CityId");
+                column: "IdCityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
