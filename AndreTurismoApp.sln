@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.TicketsServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.PackagesService", "AndreTurismoApp.PackagesService\AndreTurismoApp.PackagesService.csproj", "{98AC9866-AE6F-4B70-9B52-F8F04CBF1B98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.Test", "AndreTurismoApp.Test\AndreTurismoApp.Test.csproj", "{21ADB065-5A99-43F7-9A7B-3C4C9D189F9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{98AC9866-AE6F-4B70-9B52-F8F04CBF1B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98AC9866-AE6F-4B70-9B52-F8F04CBF1B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98AC9866-AE6F-4B70-9B52-F8F04CBF1B98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21ADB065-5A99-43F7-9A7B-3C4C9D189F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21ADB065-5A99-43F7-9A7B-3C4C9D189F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21ADB065-5A99-43F7-9A7B-3C4C9D189F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21ADB065-5A99-43F7-9A7B-3C4C9D189F9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
