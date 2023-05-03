@@ -28,22 +28,48 @@ namespace AndreTurismoApp.PackagesService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Package>>> GetPackage()
         {
-          if (_context.Package == null)
-          {
-              return NotFound();
-          }
-            return await _context.Package.ToListAsync();
+            if (_context.Package == null)
+            {
+                return NotFound();
+            }
+            return await _context.Package
+                .Include(p => p.IdCustomer)
+                    .ThenInclude(c => c.IdAddress)
+                        .ThenInclude(a => a.IdCity)
+                .Include(p => p.IdHotel)
+                    .ThenInclude(h => h.IdAddress)
+                        .ThenInclude(a => a.IdCity)
+                .Include(p => p.IdTicket)
+                    .ThenInclude(t => t.IdOrigin)
+                        .ThenInclude(a => a.IdCity)
+                .Include(p => p.IdTicket)
+                    .ThenInclude(t => t.IdDestination)
+                        .ThenInclude(a => a.IdCity)
+                .ToListAsync();
         }
 
         // GET: api/Packages/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Package>> GetPackage(int id)
         {
-          if (_context.Package == null)
-          {
-              return NotFound();
-          }
-            var package = await _context.Package.FindAsync(id);
+            if (_context.Package == null)
+            {
+                return NotFound();
+            }
+            var package = await _context.Package
+                .Include(p => p.IdCustomer)
+                    .ThenInclude(c => c.IdAddress)
+                        .ThenInclude(a => a.IdCity)
+                .Include(p => p.IdHotel)
+                    .ThenInclude(h => h.IdAddress)
+                        .ThenInclude(a => a.IdCity)
+                .Include(p => p.IdTicket)
+                    .ThenInclude(t => t.IdOrigin)
+                        .ThenInclude(a => a.IdCity)
+                .Include(p => p.IdTicket)
+                    .ThenInclude(t => t.IdDestination)
+                        .ThenInclude(a => a.IdCity)
+                .FirstOrDefaultAsync(package => package.Id == id);
 
             if (package == null)
             {
@@ -89,14 +115,31 @@ namespace AndreTurismoApp.PackagesService.Controllers
         [HttpPost]
         public async Task<ActionResult<Package>> PostPackage(Package package)
         {
-          if (_context.Package == null)
-          {
-              return Problem("Entity set 'AndreTurismoAppPackagesServiceContext.Package'  is null.");
-          }
+            if (_context.Package == null)
+            {
+                return Problem("Entity set 'AndreTurismoAppPackagesServiceContext.Package'  is null.");
+            }
+
+            AddressDTO addressDtoHotel = _postOfficesService.GetAddress(package.IdHotel.IdAddress.CEP).Result;
+            var hotelAddress = new Address(addressDtoHotel);
+            package.IdHotel.IdAddress = hotelAddress;
+
+            AddressDTO addressDtoCustomer = _postOfficesService.GetAddress(package.IdCustomer.IdAddress.CEP).Result;
+            var customerAddress = new Address(addressDtoCustomer);
+            package.IdCustomer.IdAddress = customerAddress;
+
+            AddressDTO addressDtoOrigin = _postOfficesService.GetAddress(package.IdTicket.IdOrigin.CEP).Result;
+            var originAddress = new Address(addressDtoOrigin);
+            package.IdTicket.IdOrigin = originAddress;
+
+            AddressDTO addressDtoDestination = _postOfficesService.GetAddress(package.IdTicket.IdDestination.CEP).Result;
+            var destinationAddress = new Address(addressDtoDestination);
+            package.IdTicket.IdDestination = destinationAddress;
+
             _context.Package.Add(package);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPackage", new { id = package.Id }, package);
+            return package;
         }
 
         // DELETE: api/Packages/5
