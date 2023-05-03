@@ -72,7 +72,7 @@ namespace AndreTurismoApp.Test
             City city = new City()
             {
                 Id = 4,
-                Description = "Rua 10",
+                Description = "Araraquara",
             };
 
             // Use a clean instance of the context to run the test
@@ -80,7 +80,7 @@ namespace AndreTurismoApp.Test
             {
                 CitiesController clientController = new CitiesController(context, new PostOfficesService());
                 City ct = clientController.PostCity(city).Result.Value;
-                Assert.Equal("Avenida Alberto Benassi", ct.Description);
+                Assert.Equal("Araraquara", ct.Description);
             }
         }
 
@@ -112,9 +112,9 @@ namespace AndreTurismoApp.Test
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppCitiesServiceContext(options))
             {
-                AddressesController addressController = new AddressesController(context, null);
-                Address address = addressController.DeleteAddress(2).Result.Value;
-                Assert.Null(address);
+                CitiesController citiesController = new CitiesController(context, null);
+                City city = citiesController.DeleteCity(2).Result.Value;
+                Assert.Null(city);
             }
         }
     }

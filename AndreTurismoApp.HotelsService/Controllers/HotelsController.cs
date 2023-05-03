@@ -40,7 +40,7 @@ namespace AndreTurismoApp.HotelsService.Controllers
 
         // GET: api/Hotels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Hotel>> GetHotel(int id)
+        public async Task<ActionResult<Hotel>> GetHotelById(int id)
         {
           if (_context.Hotel == null)
           {
@@ -62,7 +62,7 @@ namespace AndreTurismoApp.HotelsService.Controllers
         // PUT: api/Hotels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotel(int id, Hotel hotel)
+        public async Task<ActionResult<Hotel>> PutHotel(int id, Hotel hotel)
         {
             if (id != hotel.Id)
             {
@@ -87,7 +87,7 @@ namespace AndreTurismoApp.HotelsService.Controllers
                 }
             }
 
-            return NoContent();
+            return hotel;
         }
 
         // POST: api/Hotels
@@ -112,7 +112,7 @@ namespace AndreTurismoApp.HotelsService.Controllers
 
         // DELETE: api/Hotels/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHotel(int id)
+        public async Task<ActionResult<Hotel>> DeleteHotel(int id)
         {
             if (_context.Hotel == null)
             {

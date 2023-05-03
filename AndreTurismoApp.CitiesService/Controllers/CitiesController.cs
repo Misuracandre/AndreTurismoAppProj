@@ -82,7 +82,7 @@ namespace AndreTurismoApp.CitiesService.Controllers
                 }
             }
 
-            return NoContent();
+            return city;
         }
 
         // POST: api/Cities
@@ -101,7 +101,7 @@ namespace AndreTurismoApp.CitiesService.Controllers
             _context.City.Add(newCity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCity", new { id = newCity.Id }, newCity);
+            return newCity;
         }
 
         // DELETE: api/Cities/5

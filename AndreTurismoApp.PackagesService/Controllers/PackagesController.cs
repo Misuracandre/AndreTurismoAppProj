@@ -50,7 +50,7 @@ namespace AndreTurismoApp.PackagesService.Controllers
 
         // GET: api/Packages/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Package>> GetPackage(int id)
+        public async Task<ActionResult<Package>> GetPackageById(int id)
         {
             if (_context.Package == null)
             {
@@ -82,7 +82,7 @@ namespace AndreTurismoApp.PackagesService.Controllers
         // PUT: api/Packages/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPackage(int id, Package package)
+        public async Task<ActionResult<Package>> PutPackage(int id, Package package)
         {
             if (id != package.Id)
             {
@@ -107,7 +107,7 @@ namespace AndreTurismoApp.PackagesService.Controllers
                 }
             }
 
-            return NoContent();
+            return package;
         }
 
         // POST: api/Packages
@@ -144,7 +144,7 @@ namespace AndreTurismoApp.PackagesService.Controllers
 
         // DELETE: api/Packages/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePackage(int id)
+        public async Task<ActionResult<Package>> DeletePackage(int id)
         {
             if (_context.Package == null)
             {

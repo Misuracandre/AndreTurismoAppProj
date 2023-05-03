@@ -45,7 +45,7 @@ namespace AndreTurismoApp.TicketsService.Controllers
 
         // GET: api/Tickets/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Ticket>> GetTicket(int id)
+        public async Task<ActionResult<Ticket>> GetTicketById(int id)
         {
             if (_context.Ticket == null)
             {
@@ -72,7 +72,7 @@ namespace AndreTurismoApp.TicketsService.Controllers
         // PUT: api/Tickets/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTicket(int id, Ticket ticket)
+        public async Task<ActionResult<Ticket>> PutTicket(int id, Ticket ticket)
         {
             if (id != ticket.Id)
             {
@@ -97,7 +97,7 @@ namespace AndreTurismoApp.TicketsService.Controllers
                 }
             }
 
-            return NoContent();
+            return ticket;
         }
 
         // POST: api/Tickets
@@ -130,7 +130,7 @@ namespace AndreTurismoApp.TicketsService.Controllers
 
         // DELETE: api/Tickets/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTicket(int id)
+        public async Task<ActionResult<Ticket>> DeleteTicket(int id)
         {
             if (_context.Ticket == null)
             {
