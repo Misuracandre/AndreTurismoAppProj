@@ -109,20 +109,17 @@ namespace AndreTurismoApp.TicketsService.Controllers
             {
                 return Problem("Entity set 'AndreTurismoAppTicketsServiceContext.Ticket'  is null.");
             }
-
+            
             AddressDTO addressDtoOrigin = _postOfficesService.GetAddress(ticket.IdOrigin.CEP).Result;
             var completeAddress = new Address(addressDtoOrigin);
-            //completeAddress.IdCity = new City() { Description = addressDtoOrigin.City };
             ticket.IdOrigin = completeAddress;
 
             AddressDTO addressDtoDestination = _postOfficesService.GetAddress(ticket.IdDestination.CEP).Result;
             var addressComplete = new Address(addressDtoDestination);
-            //addressComplete.IdCity = new City() { Description = addressDtoDestination.City };
             ticket.IdDestination = addressComplete;
 
             AddressDTO addressDtoCustomer = _postOfficesService.GetAddress(ticket.IdCustomer.IdAddress.CEP).Result;
             var addressCompleteCustomer = new Address(addressDtoCustomer);
-            //addressCompleteCustomer.IdCity = new City() { Description = addressDtoCustomer.City };
             ticket.IdCustomer.IdAddress = addressCompleteCustomer;
 
             _context.Ticket.Add(ticket);
