@@ -56,7 +56,7 @@ namespace AndreTurismoApp.AddressesService.Controllers
         // PUT: api/Addresses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAddress(int id, Address address)
+        public async Task<ActionResult<Address>> PutAddress(int id, Address address)
         {
             if (id != address.Id)
             {
@@ -81,7 +81,7 @@ namespace AndreTurismoApp.AddressesService.Controllers
                 }
             }
 
-            return NoContent();
+            return address;
         }
 
         // POST: api/Addresses
@@ -105,7 +105,7 @@ namespace AndreTurismoApp.AddressesService.Controllers
 
         // DELETE: api/Addresses/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAddress(int id)
+        public async Task<ActionResult<Address>> DeleteAddress(int id)
         {
             if (_context.Address == null)
             {

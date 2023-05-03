@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.CitiesService.Data;
 using AndreTurismoApp.Models;
+using AndreTurismoApp.Services;
+using System.Net;
 
 namespace AndreTurismoApp.CitiesService.Controllers
 {
@@ -15,15 +17,17 @@ namespace AndreTurismoApp.CitiesService.Controllers
     public class CitiesController : ControllerBase
     {
         private readonly AndreTurismoAppCitiesServiceContext _context;
+        private readonly PostOfficesService _postOfficesService;
 
-        public CitiesController(AndreTurismoAppCitiesServiceContext context)
+        public CitiesController(AndreTurismoAppCitiesServiceContext context, PostOfficesService postOfficesService)
         {
             _context = context;
+            _postOfficesService = postOfficesService;
         }
 
         // GET: api/Cities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<City>>> GetCity()
+        public async Task<ActionResult<List<City>>> GetCity()
         {
           if (_context.City == null)
           {
@@ -34,7 +38,7 @@ namespace AndreTurismoApp.CitiesService.Controllers
 
         // GET: api/Cities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<City>> GetCity(int id)
+        public async Task<ActionResult<City>> GetCityById(int id)
         {
           if (_context.City == null)
           {
@@ -53,7 +57,7 @@ namespace AndreTurismoApp.CitiesService.Controllers
         // PUT: api/Cities/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCity(int id, City city)
+        public async Task<ActionResult<City>> PutCity(int id, City city)
         {
             if (id != city.Id)
             {
@@ -90,15 +94,19 @@ namespace AndreTurismoApp.CitiesService.Controllers
           {
               return Problem("Entity set 'AndreTurismoAppCitiesServiceContext.City'  is null.");
           }
-            _context.City.Add(city);
+
+            AddressDTO addreesDto = _postOfficesService.GetAddress(city.Description).Result;
+            var addressComplete = new Address(addreesDto);
+            var newCity = new City { Description = addressComplete.ToString() };
+            _context.City.Add(newCity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCity", new { id = city.Id }, city);
+            return CreatedAtAction("GetCity", new { id = newCity.Id }, newCity);
         }
 
         // DELETE: api/Cities/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCity(int id)
+        public async Task<ActionResult<City>> DeleteCity(int id)
         {
             if (_context.City == null)
             {

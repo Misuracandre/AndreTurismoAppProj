@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AndreTurismoApp.AddressesService\AndreTurismoApp.AddressesService.csproj" />
+    <ProjectReference Include="..\AndreTurismoApp.CitiesService\AndreTurismoApp.CitiesService.csproj" />
   </ItemGroup>
 
 </Project>
