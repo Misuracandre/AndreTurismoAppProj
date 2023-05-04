@@ -71,16 +71,15 @@ namespace AndreTurismoApp.Test
 
             City city = new City()
             {
-                Id = 4,
-                Description = "Araraquara",
+                Description = "Araraquara"
             };
 
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppCitiesServiceContext(options))
             {
-                CitiesController clientController = new CitiesController(context, new PostOfficesService());
-                City ct = clientController.PostCity(city).Result.Value;
-                Assert.Equal("Araraquara", ct.Description);
+                var citiesController = new CitiesController(context, null);
+                var result = citiesController.PostCity(city);
+                Assert.Equal("Araraquara", result.Result.Value.Description);
             }
         }
 
