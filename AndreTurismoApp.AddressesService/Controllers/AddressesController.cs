@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.AddressesService.Data;
 using AndreTurismoApp.Models;
 using AndreTurismoApp.Services;
+using AndreTurismoApp.Services.Producers;
 
 namespace AndreTurismoApp.AddressesService.Controllers
 {
@@ -17,11 +18,13 @@ namespace AndreTurismoApp.AddressesService.Controllers
     {
         private readonly AndreTurismoAppAddressesServiceContext _context;
         private readonly PostOfficesService _postOfficesService;
+        private readonly ProducerAddressesService _producerAddressesService;
 
-        public AddressesController(AndreTurismoAppAddressesServiceContext context, PostOfficesService postOfficesService)
+        public AddressesController(AndreTurismoAppAddressesServiceContext context, PostOfficesService postOfficesService, ProducerAddressesService producerAddressesService)
         {
             _context = context;
             _postOfficesService = postOfficesService;
+            _producerAddressesService = producerAddressesService;
         }
 
         // GET: api/Addresses
@@ -96,9 +99,10 @@ namespace AndreTurismoApp.AddressesService.Controllers
 
             AddressDTO addreesDto = _postOfficesService.GetAddress(address.CEP).Result;
             var addressComplete = new Address(addreesDto);
-            _context.Address.Add(addressComplete);
+            _producerAddressesService.PostMQAddresses(addressComplete);
+            //_context.Address.Add(addressComplete);
 
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
 
             return addressComplete;
         }

@@ -42,7 +42,7 @@ namespace AndreTurismoApp.Test
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppAddressesServiceContext(options))
             {
-                AddressesController clientController = new AddressesController(context, null);
+                AddressesController clientController = new AddressesController(context, null, null);
                 IEnumerable<Address> clients = clientController.GetAddress().Result.Value;
 
                 Assert.Equal(3, clients.Count());
@@ -58,7 +58,7 @@ namespace AndreTurismoApp.Test
             using (var context = new AndreTurismoAppAddressesServiceContext(options))
             {
                 int clientId = 2;
-                AddressesController clientController = new AddressesController(context, null);
+                AddressesController clientController = new AddressesController(context, null, null);
                 Address client = clientController.GetAddressById(clientId).Result.Value;
                 Assert.Equal(2, client.Id);
             }
@@ -80,7 +80,7 @@ namespace AndreTurismoApp.Test
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppAddressesServiceContext(options))
             {
-                AddressesController clientController = new AddressesController(context, new PostOfficesService());
+                AddressesController clientController = new AddressesController(context, new PostOfficesService(), null);
                 Address ad = clientController.PostAddress(address).Result.Value;
                 Assert.Equal("Avenida Alberto Benassi", ad.Street);
             }
@@ -101,7 +101,7 @@ namespace AndreTurismoApp.Test
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppAddressesServiceContext(options))
             {
-                AddressesController clientController = new AddressesController(context, null);
+                AddressesController clientController = new AddressesController(context, null, null);
                 Address ad = clientController.PutAddress(3, address).Result.Value;
                 Assert.Equal("Rua 10 Alterada", ad.Street);
             }
@@ -115,7 +115,7 @@ namespace AndreTurismoApp.Test
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppAddressesServiceContext(options))
             {
-                AddressesController addressController = new AddressesController(context, null);
+                AddressesController addressController = new AddressesController(context, null, null);
                 Address address = addressController.DeleteAddress(2).Result.Value;
                 Assert.Null(address);
             }

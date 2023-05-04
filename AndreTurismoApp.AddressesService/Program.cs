@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using AndreTurismoApp.AddressesService.Data;
 using AndreTurismoApp.Services;
+using AndreTurismoApp.Services.Producers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AndreTurismoAppAddressesServiceContext>(options =>
@@ -15,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<PostOfficesService>();
+builder.Services.AddSingleton<ProducerAddressesService>();
 
 var app = builder.Build();
 

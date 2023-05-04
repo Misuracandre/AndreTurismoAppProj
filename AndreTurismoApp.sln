@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.PackagesSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.Test", "AndreTurismoApp.Test\AndreTurismoApp.Test.csproj", "{21ADB065-5A99-43F7-9A7B-3C4C9D189F9C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consumers", "Consumers", "{8A27A06F-2349-4644-8340-41E9A82D1B64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumerAddressesService", "ConsumerAddressesService\ConsumerAddressesService.csproj", "{CDD1AA6D-BB54-48E1-8B70-81BE8A16F60B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,12 +81,17 @@ Global
 		{21ADB065-5A99-43F7-9A7B-3C4C9D189F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21ADB065-5A99-43F7-9A7B-3C4C9D189F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21ADB065-5A99-43F7-9A7B-3C4C9D189F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD1AA6D-BB54-48E1-8B70-81BE8A16F60B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD1AA6D-BB54-48E1-8B70-81BE8A16F60B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD1AA6D-BB54-48E1-8B70-81BE8A16F60B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD1AA6D-BB54-48E1-8B70-81BE8A16F60B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F3B1F13E-B1F8-4F2A-A8FD-E3E346E9E110} = {D794A412-932E-4139-934C-5D643DF9CB32}
+		{CDD1AA6D-BB54-48E1-8B70-81BE8A16F60B} = {8A27A06F-2349-4644-8340-41E9A82D1B64}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1793AE6A-CDF0-4DC2-86FB-6AD3D913E6BF}
