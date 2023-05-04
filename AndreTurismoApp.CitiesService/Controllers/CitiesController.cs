@@ -29,10 +29,10 @@ namespace AndreTurismoApp.CitiesService.Controllers
         [HttpGet]
         public async Task<ActionResult<List<City>>> GetCity()
         {
-          if (_context.City == null)
-          {
-              return NotFound();
-          }
+            if (_context.City == null)
+            {
+                return NotFound();
+            }
             return await _context.City.ToListAsync();
         }
 
@@ -40,10 +40,10 @@ namespace AndreTurismoApp.CitiesService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<City>> GetCityById(int id)
         {
-          if (_context.City == null)
-          {
-              return NotFound();
-          }
+            if (_context.City == null)
+            {
+                return NotFound();
+            }
             var city = await _context.City.FindAsync(id);
 
             if (city == null)
@@ -90,18 +90,25 @@ namespace AndreTurismoApp.CitiesService.Controllers
         [HttpPost]
         public async Task<ActionResult<City>> PostCity(City city)
         {
-          if (_context.City == null)
-          {
-              return Problem("Entity set 'AndreTurismoAppCitiesServiceContext.City'  is null.");
-          }
+            if (_context.City == null)
+            {
+                return Problem("Entity set 'AndreTurismoAppCitiesServiceContext.City'  is null.");
+            }
 
-            AddressDTO addreesDto = _postOfficesService.GetAddress(city.Description).Result;
-            var addressComplete = new Address(addreesDto);
-            var newCity = new City { Description = addressComplete.ToString() };
-            _context.City.Add(newCity);
-            await _context.SaveChangesAsync();
-
-            return newCity;
+            AddressDTO addreesDto = await _postOfficesService.GetAddress(city.Description);
+            string cityName = addreesDto.City;
+            City existingCity = await _context.City.FirstOrDefaultAsync(c => c.Description == cityName);
+            if (existingCity == null)
+            {
+                var newCity = new City { Description = cityName };
+                _context.City.Add(newCity);
+                await _context.SaveChangesAsync();
+                return newCity;
+            }
+            else
+            {
+                return existingCity;
+            }
         }
 
         // DELETE: api/Cities/5

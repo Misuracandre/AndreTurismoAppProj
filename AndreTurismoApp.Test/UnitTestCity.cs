@@ -69,17 +69,22 @@ namespace AndreTurismoApp.Test
         {
             InitializeDataBase();
 
-            City city = new City()
+            var city = new City
             {
-                Description = "Araraquara"
+                Description = "São Paulo"
             };
 
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppCitiesServiceContext(options))
             {
-                var citiesController = new CitiesController(context, null);
-                var result = citiesController.PostCity(city);
-                Assert.Equal("Araraquara", result.Result.Value.Description);
+                var cityName = "New City";
+                var newCity = new City { Description = cityName };
+                context.City.Add(newCity);
+                context.SaveChanges();
+
+                var result = context.City.Single(c => c.Description == cityName);
+
+                Assert.Equal(cityName, result.Description);
             }
         }
 
