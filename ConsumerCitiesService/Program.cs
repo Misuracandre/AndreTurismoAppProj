@@ -16,8 +16,8 @@ namespace RabbitMQ.Consumer
     {
         private static void Main(string[] args)
         {
-            const string QUEUE_NAME = "ProducerAddressesService";
-            
+            const string QUEUE_NAME = "ProducerCitiesService";
+
 
             var factory = new ConnectionFactory() { HostName = "localhost" };
 
@@ -37,9 +37,9 @@ namespace RabbitMQ.Consumer
                         consumer.Received += (model, ea) =>
                         {
                             var body = ea.Body.ToArray();
-                            var returnAddress = Encoding.UTF8.GetString(body);
-                            var address = JsonConvert.DeserializeObject<Address>(returnAddress);
-                            new AddressService().PostAddress(address);
+                            var returnCity = Encoding.UTF8.GetString(body);
+                            var city = JsonConvert.DeserializeObject<City>(returnCity);
+                            new CityService().PostCity(city);
                         };
 
                         channel.BasicConsume(queue: QUEUE_NAME,

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using AndreTurismoApp.Models;
 using Newtonsoft.Json;
 
-namespace AndreTurismoApp.ExternalsService
+namespace AndreTurismoApp.Services
 {
     public class AddressService
     {

@@ -1,5 +1,5 @@
-using AndreTurismoApp.ExternalsService;
 using AndreTurismoApp.Services;
+using AndreTurismoApp.Services.Producers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<AddressService>();
 builder.Services.AddSingleton<CityService>();
 builder.Services.AddSingleton<CustomerService>();
+builder.Services.AddSingleton<ProducerCitiesService>();
 
 var app = builder.Build();
 

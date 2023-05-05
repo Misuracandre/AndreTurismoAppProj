@@ -17,9 +17,20 @@ namespace AndreTurismoApp.Controllers
 
 
         [HttpGet]
-        public async Task<List<City>> Get()
+        public async Task<List<City>> GetCity()
         {
             return await _cityService.GetCity();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<City>> PostCity(City city)
+        {
+
+            var newCity = await _cityService.PostCity(city);
+            return new ObjectResult(newCity)
+            {
+                StatusCode = 201
+            };
         }
     }
 }
