@@ -8,6 +8,8 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using AndreTurismoApp.Models;
 using System.Drawing.Text;
+using AndreTurismoApp.Services;
+using AndreTurismoApp.ExternalsService;
 
 namespace RabbitMQ.Consumer
 {
@@ -15,7 +17,7 @@ namespace RabbitMQ.Consumer
     {
         private static void Main(string[] args)
         {
-            const string QUEUE_NAME = "AddressesProducer";
+            const string QUEUE_NAME = "ProducerAddressesService";
             
 
             var factory = new ConnectionFactory() { HostName = "localhost" };
@@ -38,14 +40,7 @@ namespace RabbitMQ.Consumer
                             var body = ea.Body.ToArray();
                             var returnAddress = Encoding.UTF8.GetString(body);
                             var address = JsonConvert.DeserializeObject<Address>(returnAddress);
-                            using (var httpClient = new HttpClient())
-                            {
-                                var response = httpClient.PostAsJsonAsync("http://localhost:7054/api/Addresses", address).Result;
-                                if (!response.IsSuccessStatusCode)
-                                {
-                                    Console.WriteLine("Failed to save address: " + response.ReasonPhrase);
-                                }
-                            }
+                            new AddressService().PostAddress(address);
                         };
 
                         channel.BasicConsume(queue: QUEUE_NAME,

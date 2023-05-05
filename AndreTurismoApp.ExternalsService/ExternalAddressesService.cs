@@ -47,7 +47,7 @@ namespace AndreTurismoApp.ExternalsService
 
         public async Task<HttpStatusCode> PostAddress(Address address)
         {
-            HttpResponseMessage response = await addresses.PostAsJsonAsync("https://localhost:7054/api/Addresses", address);
+            HttpResponseMessage response = await addresses.PostAsJsonAsync("https://localhost:7054/api/Addresses/", address);
             return response.StatusCode;
         }
 

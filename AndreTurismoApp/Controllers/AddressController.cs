@@ -1,4 +1,5 @@
-﻿using AndreTurismoApp.Models;
+﻿using AndreTurismoApp.ExternalsService;
+using AndreTurismoApp.Models;
 using AndreTurismoApp.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,11 @@ namespace AndreTurismoApp.Controllers
         public async Task<ActionResult<Address>> PostAddress(Address address)
         {
 
-            return null;
+            var newAddress = await _addressService.PostAddress(address);
+            return new ObjectResult(newAddress)
+            {
+                StatusCode = 201
+            };
         }
     }
 }

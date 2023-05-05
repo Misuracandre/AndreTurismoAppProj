@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AndreTurismoApp.AddressesService\AndreTurismoApp.AddressesService.csproj" />
     <ProjectReference Include="..\AndreTurismoApp.Models\AndreTurismoApp.Models.csproj" />
+    <ProjectReference Include="..\AndreTurismoApp\AndreTurismoApp.csproj" />
   </ItemGroup>
 
 </Project>

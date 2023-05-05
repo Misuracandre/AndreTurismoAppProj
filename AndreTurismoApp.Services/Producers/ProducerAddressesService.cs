@@ -23,7 +23,7 @@ namespace AndreTurismoApp.Services.Producers
         }
 
         [HttpPost]
-        public IActionResult PostMQAddresses([FromBody] Address address)
+        public ActionResult PostMQAddresses([FromBody] Address address)
         {
             using (var connection = _factory.CreateConnection())
             {

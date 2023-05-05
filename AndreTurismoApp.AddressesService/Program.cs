@@ -16,7 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<PostOfficesService>();
-builder.Services.AddSingleton<ProducerAddressesService>();
+builder.Services.AddScoped<ProducerAddressesService>();
 
 var app = builder.Build();
 

@@ -1,3 +1,4 @@
+using AndreTurismoApp.ExternalsService;
 using AndreTurismoApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
